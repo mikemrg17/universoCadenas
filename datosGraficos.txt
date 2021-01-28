@@ -1,0 +1,4 @@
+Número decimal: 0-> Cantidad de unos0 -> log2 = -Infinity -> log10 = -Infinity
+Número decimal: 1-> Cantidad de unos1 -> log2 = 0 -> log10 = 0
+Número decimal: 2-> Cantidad de unos1 -> log2 = 0 -> log10 = 0
+Número decimal: 3-> Cantidad de unos2 -> log2 = 1 -> log10 = 0.3010299956639812

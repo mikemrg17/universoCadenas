@@ -1,7 +1,6 @@
 const readline = require('readline');
 const fs = require('fs');
 const { exit } = require('process');
-//const { spawn } = require('child_process');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -14,6 +13,7 @@ const rl = readline.createInterface({
 
 function manual(){
     fs.createWriteStream('universo.txt');
+    fs.createWriteStream('datosGraficos.txt');
     fs.appendFileSync('universo.txt', "U={\n", (error)=>{
         if (error) console.log(`Error: ${error}`);
     });
@@ -22,6 +22,7 @@ function manual(){
         let numeroDecimal;
         let numeroBinario;
         let banderaProceso;
+        let contadorUnos;
         for(numeroDecimal = 0; numeroDecimal <= combinaciones; numeroDecimal++){
             numeroBinario = numeroDecimal.toString(2);
             fs.appendFileSync('universo.txt',"\t" +numeroBinario + "\n", (error)=>{
@@ -29,6 +30,12 @@ function manual(){
             });
             console.log("numero binario: " + numeroBinario);
             banderaProceso = proceso(numeroBinario, potencia);
+            contadorUnos= contarUnos(numeroBinario);
+            let log2 = Math.log2(contadorUnos);
+            let log10 = Math.log10(contadorUnos);
+            fs.appendFileSync('datosGraficos.txt', "Número decimal: " + numeroDecimal + "-> Cantidad de unos" + contadorUnos + " -> log2 = " + log2 + " -> log10 = " + log10 + "\n", (error)=>{
+                if (error) console.log(`Error: ${error}`);
+            });
             if(banderaProceso == 1){
                 break;
             }else{
@@ -44,6 +51,7 @@ function manual(){
 
 function aleatoria(){
     fs.createWriteStream('universo.txt');
+    fs.createWriteStream('datosGraficos.txt');
     fs.appendFileSync('universo.txt', "U={\n", (error)=>{
         if (error) console.log(`Error: ${error}`);
     });
@@ -60,6 +68,11 @@ function aleatoria(){
         });
         console.log("numero binario: " + numeroBinario);
         banderaProceso = proceso(numeroBinario, potencia);
+        let log2 = Math.log2(contadorUnos);
+        let log10 = Math.log10(contadorUnos);
+        fs.appendFileSync('datosGraficos.txt', "Número decimal: " + numeroDecimal + "-> Cantidad de unos" + contadorUnos + " -> log2 = " + log2 + " -> log10 = " + log10 + "\n", (error)=>{
+            if (error) console.log(`Error: ${error}`);
+        });
         if(banderaProceso == 1){
             break;
         }else{
@@ -81,7 +94,6 @@ function proceso(numeroBinario, potencia){
         bandera = 0;
     }
     return bandera;
-    //console.log("Numero de 1: " + contarUnos(numeroBinario));
 }
 
 function contarUnos(numeroBinario){
@@ -108,7 +120,6 @@ function menu1(){
         }else{
             exit();
         }
-        //rl.close();
     });
 }
 
@@ -123,8 +134,4 @@ function menu2(){
             exit();
         }
     });
-}
-
-function datosAGraficar(){
-    
 }
