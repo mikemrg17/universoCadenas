@@ -25,7 +25,7 @@ function manual(){
         let contadorUnos;
         for(numeroDecimal = 0; numeroDecimal <= combinaciones; numeroDecimal++){
             numeroBinario = numeroDecimal.toString(2);
-            fs.appendFileSync('universo.txt',"\t" +numeroBinario + "\n", (error)=>{
+            fs.appendFileSync('universo.txt',"\t" +numeroBinario + ",\n", (error)=>{
                 if (error) console.log(`Error: ${error}`);
             });
             console.log("numero binario: " + numeroBinario);
