@@ -9,25 +9,12 @@ const rl = readline.createInterface({
 });
 
 (function(){
-    console.log("\nBienvenido al programa del universo de cadenas");
-    console.log("\t1. Ingresar potencia manualmente");
-    console.log("\t2. Generar potencia aleatoria");
-    console.log("\t3. Salir del programa");
-    rl.question('Opción:' , (opcion) =>{
-        if(opcion == 1){
-            manual();
-        }else if(opcion == 2){
-            aleatoria();
-        }else{
-            exit();
-        }
-        //rl.close();
-    });
+    menu1();
 })();
 
 function manual(){
-    fs.createWriteStream('output.txt');
-    fs.appendFileSync('output.txt', "U={\n", (error)=>{
+    fs.createWriteStream('universo.txt');
+    fs.appendFileSync('universo.txt', "U={\n", (error)=>{
         if (error) console.log(`Error: ${error}`);
     });
     rl.question('Por favor inserta una potencia ', (potencia) =>{
@@ -37,7 +24,7 @@ function manual(){
         let banderaProceso;
         for(numeroDecimal = 0; numeroDecimal <= combinaciones; numeroDecimal++){
             numeroBinario = numeroDecimal.toString(2);
-            fs.appendFileSync('output.txt',"\t" +numeroBinario + "\n", (error)=>{
+            fs.appendFileSync('universo.txt',"\t" +numeroBinario + "\n", (error)=>{
                 if (error) console.log(`Error: ${error}`);
             });
             console.log("numero binario: " + numeroBinario);
@@ -48,7 +35,7 @@ function manual(){
                 continue;
             }
         }
-        fs.appendFile('output.txt', "}", (error)=>{
+        fs.appendFile('universo.txt', "}", (error)=>{
             if (error) console.log(`Error: ${error}`);
         });
         menu2();
@@ -56,8 +43,8 @@ function manual(){
 }
 
 function aleatoria(){
-    fs.createWriteStream('output.txt');
-    fs.appendFileSync('output.txt', "U={\n", (error)=>{
+    fs.createWriteStream('universo.txt');
+    fs.appendFileSync('universo.txt', "U={\n", (error)=>{
         if (error) console.log(`Error: ${error}`);
     });
     let potencia = Math.round(Math.random() * (1000-0) + 0);
@@ -68,7 +55,7 @@ function aleatoria(){
     let banderaProceso;
     for(numeroDecimal = 0; numeroDecimal <= combinaciones; numeroDecimal++){
         numeroBinario = numeroDecimal.toString(2);
-        fs.appendFileSync('output.txt',"\t" +numeroBinario + "\n", (error)=>{
+        fs.appendFileSync('universo.txt',"\t" +numeroBinario + "\n", (error)=>{
             if (error) console.log(`Error: ${error}`);
         });
         console.log("numero binario: " + numeroBinario);
@@ -79,7 +66,7 @@ function aleatoria(){
             continue;
         }
     }
-    fs.appendFile('output.txt', "}", (error)=>{
+    fs.appendFile('universo.txt', "}", (error)=>{
         if (error) console.log(`Error: ${error}`);
     });
     menu2();
@@ -136,4 +123,8 @@ function menu2(){
             exit();
         }
     });
+}
+
+function datosAGraficar(){
+    
 }
